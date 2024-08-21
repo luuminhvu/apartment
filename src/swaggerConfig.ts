@@ -3,9 +3,9 @@ const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "API Documentation",
+      title: "APARTMENT MANAGEMENT API",
       version: "1.0.0",
-      description: "API Information",
+      description: "API documentation for the Apartment Management API",
       contact: {
         name: "Apartment API",
       },
