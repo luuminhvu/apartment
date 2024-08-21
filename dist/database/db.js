@@ -7,6 +7,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const sequelize_typescript_1 = require("sequelize-typescript");
 const User_1 = require("../models/User");
+const mysql2_1 = __importDefault(require("mysql2"));
 const sequelize = new sequelize_typescript_1.Sequelize({
     dialect: process.env.DB_DIALECT,
     host: process.env.DB_HOST,
@@ -16,5 +17,6 @@ const sequelize = new sequelize_typescript_1.Sequelize({
     database: process.env.DB_NAME,
     models: [User_1.User],
     logging: false,
+    dialectModule: mysql2_1.default,
 });
 exports.default = sequelize;
