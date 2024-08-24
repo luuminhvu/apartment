@@ -6,9 +6,12 @@ import {
   PrimaryKey,
   AutoIncrement,
   Unique,
+  BelongsTo,
+  ForeignKey,
 } from "sequelize-typescript";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { Room } from "./Room";
 dotenv.config();
 @Table({
   tableName: "users",
@@ -44,6 +47,12 @@ export class User extends Model<User> {
     defaultValue: "tenant",
   })
   userType!: "tenant" | "landlord" | "manager" | "admin";
+  @ForeignKey(() => Room)
+  @Column(DataType.INTEGER)
+  roomId!: number;
+
+  @BelongsTo(() => Room)
+  room!: Room;
   public generateAuthToken(): string {
     const payload = { id: this.id, email: this.email, type: this.userType };
     return jwt.sign(payload, process.env.JWT_SECRET || "your_jwt_secret", {

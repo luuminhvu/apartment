@@ -1,8 +1,9 @@
 import express, { Request, Response } from "express";
-import swaggerJsDoc from "swagger-jsdoc";
+
 import swaggerUi from "swagger-ui-express";
 import auth from "./routers/auth";
 import user from "./routers/user";
+import apartment from "./routers/apartment";
 import cors from "cors";
 import bodyParser from "body-parser";
 import("./database/connect");
@@ -26,6 +27,7 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use("/auth", auth);
 app.use("/user", user);
+app.use("/apartment", apartment);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
