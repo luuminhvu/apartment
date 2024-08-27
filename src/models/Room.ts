@@ -8,9 +8,12 @@ import {
   HasMany,
   BelongsTo,
   ForeignKey,
+  BelongsToMany,
 } from "sequelize-typescript";
 import { User } from "./User";
 import { Floor } from "./Floor";
+import { Amenity } from "./Amenity";
+import { RoomAmenity } from "./RoomAmenity";
 
 @Table({
   tableName: "rooms",
@@ -31,14 +34,19 @@ export class Room extends Model<Room> {
   @Column(DataType.STRING)
   roomType!: string;
 
-  @Column(DataType.TEXT)
-  amenities!: string;
-
   @Column(DataType.DECIMAL)
   rentPrice!: number;
 
   @Column(DataType.INTEGER)
   totalSlots!: number;
+  @Column(DataType.INTEGER)
+  numberOfBedrooms!: number;
+
+  @Column(DataType.INTEGER)
+  numberOfBathrooms!: number;
+
+  @Column(DataType.INTEGER)
+  acreage!: number;
 
   @Column(DataType.INTEGER)
   occupiedSlots!: number;
@@ -58,6 +66,9 @@ export class Room extends Model<Room> {
 
   @BelongsTo(() => Floor)
   floor!: Floor;
+
+  @BelongsToMany(() => Amenity, () => RoomAmenity)
+  amenities!: Amenity[];
 
   public getAvailableSpace(): string {
     const fraction = this.totalSlots - this.occupiedSlots;

@@ -1,10 +1,10 @@
 import { ErrorResponse, SuccessResponse } from "../components/Response";
+import { Amenity } from "../models/Amenity";
 import { Area } from "../models/Area";
 import { Building } from "../models/Building";
 import { Floor } from "../models/Floor";
 import { Room } from "../models/Room";
 import { Request, Response } from "express";
-import { Includeable } from "sequelize/types";
 
 export const getAllAreas = async (req: Request, res: Response) => {
   try {
@@ -29,7 +29,20 @@ export const getAllAreas = async (req: Request, res: Response) => {
                     "roomType",
                     "status",
                     "rentPrice",
-                    "amenities",
+                    "numberOfBedrooms",
+                    "numberOfBathrooms",
+                    "acreage",
+                    "occupiedSlots",
+                    "availableSpace",
+                  ],
+                  include: [
+                    {
+                      model: Amenity,
+                      attributes: ["name"], // Chỉ lấy tên của tiện ích
+                      through: {
+                        attributes: [], // Không lấy các thuộc tính của bảng trung gian
+                      },
+                    },
                   ],
                 },
               ],

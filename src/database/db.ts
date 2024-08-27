@@ -8,6 +8,9 @@ import { Area } from "../models/Area";
 import { Building } from "../models/Building";
 import { Floor } from "../models/Floor";
 import { Room } from "../models/Room";
+import { RoomAmenity } from "../models/RoomAmenity";
+import { Amenity } from "../models/Amenity";
+import { Feedback } from "../models/Feedback";
 
 const sequelize = new Sequelize({
   dialect: process.env.DB_DIALECT as "mysql",
@@ -16,7 +19,7 @@ const sequelize = new Sequelize({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  models: [User, Area, Building, Floor, Room],
+  models: [User, Area, Building, Floor, Room, RoomAmenity, Amenity, Feedback],
   logging: false,
   dialectModule: mysql2,
 });
